@@ -1,0 +1,39 @@
+This repo contains The Qt Company partner training material. The current material is based on Qt 5.6, but there’a a plan to release Qt 5.7-based version in August.
+
+There are four pre-defined training editions. Partners can modify, combine, change, and add content as they wish as long as the partner program terms and conditions are met. 
+* Essentials edition - Qt basics
+* Engine edition - C++ programming with Qt non-GUI modules
+* Widget edition
+* QML edition
+
+TERMS AND CONDITIONS
+
+* The material is branded Qt, and our partnership and the fact that the material is developed by The Qt Company is communicated to the participants
+* Partners are allowed to tailor the material to their specific needs, but if they do, they must keep the Qt branding along with a notice that the material is based on material provided by The Qt Company.
+* Each course contains a module about licensing that is in line with the Qt Company’s communication on the subject
+* Each course on embedded includes training on the functionality specific to The Qt Company’s commercial offering
+* All training is done by trainers qualified by The Qt Company (see below).
+* Slides may be distributed to training participants, but only in paper- or pdf format and with notices about copyrights
+* The participants in trainings where the provided material is used, unchanged or modified, are registered as licensing leads with The Qt Company using Qt Company’s partner portal (currently being tested) or in some other way as agreed with The Qt Company. Any exception from this must be agreed with The Qt Company prior to the training.
+* Planned trainings can be registered with The Qt Company for listing on www.qt.io.
+* The Qt Company will work with the training partners to maintain a high quality level of the Qt trainings and may implement processes for quality assurance of the trainings
+* Participation in the program is based on the premise that partners comply with the terms. Breach of the terms can lead to a partner being terminated from the program and thereby losing the rights to use the material as decided by The Qt Company.
+* Either party can terminate the partner's participation in the program for any reason. 90 days after such termination for other reasons than breach of the terms, the partner can no longer use the material provided.
+* The participants should be given this link <THIS LINK IS UNDER CONSTRUCTION> for them to provide their feedback to the training.
+
+The Qt Company Training management can be reached at: training@qt.io
+
+SOURCE CODE LICENSE
+
+Copyright (C) 2016 The Qt Group Plc.
+All rights reserved.
+Contact: The Qt Company Ltd. (training@theqtcompany.com)
+
+You may use the files in this repository under the terms of the BSD license as follows:
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+* Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+* Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+* Neither the name of Qt Group Plc. nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
