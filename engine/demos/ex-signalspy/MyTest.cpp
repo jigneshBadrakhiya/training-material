@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 The Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
@@ -19,7 +19,7 @@ MyTest::MyTest()
 void MyTest::testStart()
 {
 	MyTimer timer;
-	QSignalSpy spy(&timer, SIGNAL(ownTimerTimeout()));
+    QSignalSpy spy(&timer, &MyTimer::ownTimerTimeout);
 
     // precondition
     QVERIFY(spy.isValid());
@@ -40,7 +40,7 @@ void MyTest::testStart()
 void MyTest::testStop()
 {
 	MyTimer timer;
-	QSignalSpy spy(&timer, SIGNAL(ownTimerTimeout()));
+    QSignalSpy spy(&timer, &MyTimer::ownTimerTimeout);
 
     // precondition
     QVERIFY(spy.isValid());

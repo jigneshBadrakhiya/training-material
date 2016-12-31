@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 The Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
@@ -12,8 +12,8 @@
 
 #include <QtWidgets>
 
-class QLabel;
-class QSlider;
+QT_FORWARD_DECLARE_CLASS(QLabel)
+QT_FORWARD_DECLARE_CLASS(QSlider)
 
 class Slider : public QWidget
 {

@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 The Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
@@ -12,7 +12,7 @@
 SelectColor::SelectColor(QWidget *parent)
     : QWidget(parent)
 {
-    m_label = new QLabel("Not Set");
+    m_label = new QLabel("white");
     m_label->setAutoFillBackground(true);
     QPushButton *button = new QPushButton("Select Color");
     connect(button, &QPushButton::clicked, this, &SelectColor::showColorSelector);

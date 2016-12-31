@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 The Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
@@ -19,21 +19,21 @@ int main(int argc, char *argv[])
 
     QWidget window;
 
-    QSlider slider(Qt::Horizontal);
-    slider.setRange(0, 100);
+    QSlider *slider = new QSlider(Qt::Horizontal);
+    slider->setRange(0, 100);
 
-    QSpinBox spin;
+    QSpinBox *spin = new QSpinBox;
 
-    QObject::connect(&slider, SIGNAL(valueChanged(int)), &spin, SLOT(setValue(int)));
-    QObject::connect(&slider, &QSlider::valueChanged, &printValue );
+    QObject::connect(slider, &QSlider::valueChanged, spin, &QSpinBox::setValue);
+    QObject::connect(slider, &QSlider::valueChanged, &printValue);
 
     // slider and spin are connected, change will be propagated to spinbox
-    slider.setValue(40);
+    slider->setValue(40);
 
-    QHBoxLayout layout;
-    layout.addWidget(&slider);
-    layout.addWidget(&spin);
-    window.setLayout(&layout);
+    QHBoxLayout *layout = new QHBoxLayout;
+    layout->addWidget(slider);
+    layout->addWidget(spin);
+    window.setLayout(layout);
     window.show();
 
     return app.exec();

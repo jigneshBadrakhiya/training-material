@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 The Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
     // Ensure that the widget can grow when resizing the window, ignore this for now
     lcd->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
 
-    QObject::connect(slider, SIGNAL(valueChanged(int)), lcd, SLOT(display(int)));
+    QObject::connect(slider, &Slider::valueChanged, lcd, qOverload<int>(&QLCDNumber::display));
 
     slider->setValue(40);
 

@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 The Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
@@ -13,7 +13,8 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    QWidget *window = new QWidget;
+    // Top-level widget - allocated in the stack
+    QWidget window;
 
     QSlider *slider = new QSlider(Qt::Horizontal);
     slider->setRange(0, 100);
@@ -22,8 +23,10 @@ int main(int argc, char *argv[])
 
     QObject::connect(slider, &QSlider::valueChanged, spin, &QSpinBox::setValue);
 
-    // From spin to slider
-    QObject::connect(spin, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), slider, &QSlider::setValue);
+    // From spin to slider qOverload<int, QString>(&Foo::overloadedFunction)
+    QObject::connect(spin, qOverload<int>(&QSpinBox::valueChanged), slider, &QSlider::setValue);
+    // Or alternativeliy
+    // QObject::connect(spin, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), slider, &QSlider::setValue);
 
     // slider and spin are connected, change will be propagated to spinbox (and vice versa)
     // How an infite loop is avoided?
@@ -33,13 +36,8 @@ int main(int argc, char *argv[])
     QHBoxLayout *layout = new QHBoxLayout;
     layout->addWidget(slider);
     layout->addWidget(spin);
-    window->setLayout(layout);
-    window->show();
+    window.setLayout(layout); // Window will be now the parent of the layout, slider and spin
+    window.show();
 
-    int returnValue = app.exec();
-    delete layout;
-    delete spin;
-    delete slider;
-    delete window;
-    return returnValue;
+    return app.exec();
 }
