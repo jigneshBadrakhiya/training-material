@@ -8,7 +8,9 @@ QT += sql quick
 OTHER_FILES += \
     main.qml \
     AuthorView.qml \
-    BookView.qml
+    BookView.qml \
+    Editor.qml \
+    readme.txt
 
 RESOURCES += \
     bookstore.qrc

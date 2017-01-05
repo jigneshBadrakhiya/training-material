@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 The Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
@@ -12,23 +12,19 @@
 
 #include <QAbstractListModel>
 
-class QAbstractTableModel;
+QT_FORWARD_DECLARE_CLASS(QAbstractTableModel)
 
 class TableToListModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
-    explicit TableToListModel(QObject *parent = 0);
-    
+    explicit TableToListModel(QObject *parent = Q_NULLPTR);
     void setTableModel(QAbstractTableModel *sourceModel);
-
     void addColumnMapping(int column, const QByteArray &qmlProperty);
-
-    QHash<int, QByteArray> roleNames() const;
-
+    QHash<int, QByteArray> roleNames() const Q_DECL_OVERRIDE;
     int rowCount(const QModelIndex &parent) const Q_DECL_OVERRIDE;
+    QVariant data(const QModelIndex &proxyIndex, int role) const Q_DECL_OVERRIDE;
 
-    QVariant data(const QModelIndex &proxyIndex, int role) const;
     Q_INVOKABLE QVariant data(int row, const QByteArray &qmlProperty) const;
     Q_INVOKABLE void setData(int row, const QByteArray &qmlProperty, const QVariant &value);
 

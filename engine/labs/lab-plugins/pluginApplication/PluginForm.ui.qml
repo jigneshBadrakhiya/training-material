@@ -28,7 +28,7 @@ Item {
             id: statusLabel
             width: parent.width
             text: "-- Ready --"
-            font.pointSize: 16
+            font.pointSize: 24
             horizontalAlignment: Text.AlignHCenter
         }
 
@@ -36,18 +36,21 @@ Item {
             id: plugin1Button
             width: parent.width
             text: qsTr("Load plugin 1")
+            font.pointSize: 24
         }
 
         Button {
             id: plugin2Button
             width: parent.width
             text: qsTr("Load plugin 2")
+            font.pointSize: 24
         }
 
         Button {
             id: resetButton
             width: parent.width
             text: qsTr("Reset")
+            font.pointSize: 24
         }
 
     }

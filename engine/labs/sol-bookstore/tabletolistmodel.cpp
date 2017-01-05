@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 The Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
@@ -8,7 +8,6 @@
  *************************************************************************/
 
 #include "tabletolistmodel.h"
-
 #include "bookmodel.h"
 
 #include <QAbstractTableModel>
@@ -83,8 +82,12 @@ void TableToListModel::setData(int row, const QByteArray &qmlProperty, const QVa
 void TableToListModel::removeItem(int row)
 {
     beginRemoveRows(QModelIndex(), row, row);
-    m_sourceModel->removeRows( row, 1, QModelIndex() );
+    m_sourceModel->removeRows(row, 1, QModelIndex());
     endRemoveRows();
+    // QSqlTableModel removeRows() requires select() call
+    QSqlTableModel *tableModel = qobject_cast<QSqlTableModel *>(m_sourceModel);
+    if (tableModel)
+        tableModel->select();
 }
 
 void TableToListModel::insertItems(int row, int nofRows)

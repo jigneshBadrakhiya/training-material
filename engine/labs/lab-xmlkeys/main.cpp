@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 The Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
@@ -59,13 +59,13 @@ void readKeys(KeyEngine *engine)
     file.close();
 }
 
-int main(int argc, char **argv)
+int main(int argc, char *argv[])
 {
     QCoreApplication app(argc, argv);
 
-    KeyEngine *engine = new KeyEngine(QCoreApplication::instance());
+    KeyEngine *engine = new KeyEngine(&app);
 
-    for(int i=0; i<10; i++) {
+    for (int i=0; i<10; i++) {
         QString key = QString("Key-%1").arg(i);
         QString value = QString("Value-%1").arg(i);
         engine->setValue(key, value);

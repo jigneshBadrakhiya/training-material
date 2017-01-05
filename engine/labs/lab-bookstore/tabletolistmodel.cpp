@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 The Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
@@ -8,6 +8,7 @@
  *************************************************************************/
 
 #include "tabletolistmodel.h"
+#include "bookmodel.h"
 
 #include <QAbstractTableModel>
 #include <QSqlTableModel>
@@ -80,21 +81,24 @@ void TableToListModel::setData(int row, const QByteArray &qmlProperty, const QVa
 
 void TableToListModel::removeItem(int row)
 {
-    // Optional
+    // Optional Step
     // In addition to removing rows, you need to notify the views
+    // Note that after removing rows from QSqlTableModel, you need to call select() again
 }
 
 void TableToListModel::insertItems(int row, int nofRows)
 {
-    // Optional
+    // Optional Step
     // In addition to inserting rows, you need to notify the views
 }
 
 void TableToListModel::showAuthor(int authorId)
 {
-    // In addition to quering author's books,
-    // we need to notify the view about the changes
-    // in the model
-
+    BookModel *model = qobject_cast<BookModel *>(m_sourceModel);
+    if (model) {
+        beginResetModel();
+        model->showAuthor(authorId);
+        endResetModel();
+    }
 }
 

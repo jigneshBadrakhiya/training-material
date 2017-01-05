@@ -3,6 +3,6 @@
         <file>AuthorView.qml</file>
         <file>BookView.qml</file>
         <file>main.qml</file>
-        <file>Button.qml</file>
+        <file>Editor.qml</file>
     </qresource>
 </RCC>

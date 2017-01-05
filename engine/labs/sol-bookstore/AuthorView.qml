@@ -1,41 +1,51 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 The Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
  *
  *************************************************************************/
 
-import QtQuick 2.3
+import QtQuick 2.8
 import QtQuick.Window 2.2
+import QtQuick.Layouts 1.1
+import QtQuick.Controls 2.1
 
 Item {
+    signal authorChanged()
     Component {
         id: authorDelegate
-
-        Grid {
+        GridLayout {
             property var listView: ListView.view
+            width: listView.width
             columns: 2
-            spacing: 5
-            Text {
+            rowSpacing: 5
+
+            // First name row
+            Label {
+                id: firstnameText
                 text: qsTr("First Name:")
+                Layout.topMargin: 10
             }
-
-            TextInput {
+            Editor {
                 text: (firstName == undefined) ? "" : firstName
-                onAccepted:
-                    _bookStore.authorsModel.setData(listView.currentIndex, "firstName", text);
+                onAccepted: _bookStore.authorsModel.setData(listView.currentIndex, "firstName", text);
+                Layout.fillWidth: true
+                Layout.topMargin: 10
             }
 
-            Text {
+            // Last name row
+            Label {
+                id: lastnameText
                 text: qsTr("Last Name:")
+                Layout.bottomMargin: 10
             }
-
-            TextInput {
+            Editor {
                 text: (lastName == undefined) ? "" : lastName
-                onAccepted:
-                    _bookStore.authorsModel.setData(listView.currentIndex, "lastName", text);
+                onAccepted: _bookStore.authorsModel.setData(listView.currentIndex, "lastName", text);
+                Layout.fillWidth: true
+                Layout.bottomMargin: 10
             }
         }
     }
@@ -44,18 +54,23 @@ Item {
         model: _bookStore.authorsModel
         delegate: authorDelegate
         highlight: Rectangle { width: parent.width; color: "lightsteelblue"; radius: 5 }
+
+        headerPositioning: ListView.OverlayHeader
         header: Rectangle {
+            z: 10
             height: 20
             width: parent.width
             color: "lightblue"
-
             Text {
                 text: qsTr("Author")
                 anchors.centerIn: parent
             }
         }
+
+        footerPositioning: ListView.OverlayFooter
         footer: Rectangle {
             property var listView: ListView.view
+            z: 10
             width: parent.width
             height: 30
 
@@ -68,15 +83,11 @@ Item {
 
                 Button {
                     id: addAuthorButton
-                    buttonText: qsTr("Add Author")
-                    anchors.centerIn: parent
-                }
-
-                MouseArea {
+                    text: qsTr("Add Author")
                     anchors.fill: parent
                     onClicked: {
-                        addAuthorButton.notify();
                         _bookStore.addAuthor();
+                        listView.currentIndex = listView.count - 1;
                     }
                 }
             }
@@ -91,24 +102,22 @@ Item {
 
                 Button {
                     id: removeAuthorButton
-                    buttonText: qsTr("Remove Author")
-                    anchors.centerIn: parent
-                }
-
-                MouseArea {
+                    text: qsTr("Remove Author")
                     anchors.fill: parent
                     onClicked: {
-                        removeAuthorButton.notify();
                         _bookStore.removeAuthor(listView.currentIndex);
                     }
                 }
             }
         }
 
-        onCurrentIndexChanged: _bookStore.authorChanged(currentIndex);
-
+        onCurrentIndexChanged: {
+            _bookStore.authorChanged(currentIndex);
+            authorChanged();
+        }
 
         focus: true
         anchors.fill: parent
+        clip: true
     }
 }

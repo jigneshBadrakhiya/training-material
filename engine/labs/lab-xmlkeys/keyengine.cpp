@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 The Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
@@ -14,13 +14,13 @@ KeyEngine::KeyEngine(QObject *parent) :
 {
 }
 
-void KeyEngine::setValue(const QString& key, const QString& value)
+void KeyEngine::setValue(const QString &key, const QString &value)
 {
     m_data.insert(key, value);
     emit keysChanged(key);
 }
 
-QString KeyEngine::value(const QString& key) const
+QString KeyEngine::value(const QString&key) const
 {
     return m_data.value(key);
 }
@@ -35,7 +35,7 @@ bool KeyEngine::contains(const QString &key) const
     return m_data.contains(key);
 }
 
-void KeyEngine::remove(const QString& key)
+void KeyEngine::remove(const QString &key)
 {
     m_data.remove(key);
 }
@@ -51,7 +51,7 @@ void KeyEngine::dump()
     qDebug() << "Dump KeyEngine Data";
     qDebug() << keys().count() << " keys";
     qDebug();
-    foreach(const QString& key, keys()) {
+    for (const QString& key : keys()) {
         qDebug() << key << " : " << value(key);
     }
 }

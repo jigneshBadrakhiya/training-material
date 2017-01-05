@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 The Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
@@ -8,17 +8,18 @@
  *************************************************************************/
 
 #include <QGuiApplication>
-#include <QtQuick>
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
 #include "bookstore.h"
 
-int main( int argc, char** argv ) {
-    QGuiApplication app( argc, argv );
-    BookStore* bookStore = new BookStore;
+int main(int argc, char *argv[])
+{
+    QGuiApplication app(argc, argv);
+    BookStore bookStore;
 
-    QQuickView view;
-    view.engine()->rootContext()->setContextProperty( "_bookStore", bookStore );
-    view.setSource(QUrl("qrc:/main.qml"));
-    view.show();
+    QQmlApplicationEngine engine;
+    engine.rootContext()->setContextProperty("_bookStore", &bookStore);
+    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
     return app.exec();
 }
