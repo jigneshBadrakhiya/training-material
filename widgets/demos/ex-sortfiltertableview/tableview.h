@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 The Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
@@ -17,12 +17,12 @@ class TableView : public QWidget
     Q_OBJECT
 
 public:
-    explicit TableView( QWidget *parent = 0 );
+    explicit TableView(QWidget *parent = Q_NULLPTR);
 
-    void setModel( QAbstractItemModel* model );
+    void setModel(QAbstractItemModel *model);
 
-private slots:
-    void setFilterColumn( int );
+private Q_SLOTS:
+    void setFilterColumn(int);
 
 private:
     QSortFilterProxyModel *m_proxy;

@@ -1,4 +1,4 @@
-# include(../../examples.pri)
+TEMPLATE += app
 HEADERS += coordinatesystem.h \
     mainwindow.h \
     transformdialog.h \
@@ -13,4 +13,4 @@ SOURCES += main.cpp \
 FORMS += mainwindow.ui \
     transformdialog.ui
 RESOURCES += icons.qrc
-QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets

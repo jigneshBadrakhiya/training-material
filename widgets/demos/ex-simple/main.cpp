@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 The Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
@@ -13,21 +13,21 @@
 #include <QtWidgets/QSplitter>
 #include <QtWidgets/QApplication>
 
-int main( int argc, char** argv ) {
-    QApplication app( argc, argv );
+int main(int argc, char *argv[]) {
+    QApplication app(argc, argv);
 
     QSplitter splitter;
 
-    QTreeView* tree = new QTreeView( &splitter );
-    QListView* list = new QListView( &splitter );
+    QTreeView *tree = new QTreeView(&splitter);
+    QListView *list = new QListView(&splitter);
 
-    QFileSystemModel* model = new QFileSystemModel;
-    model->setRootPath( QDir::root().path() );
+    QFileSystemModel *model = new QFileSystemModel(&app);
+    model->setRootPath(QDir::root().path());
 
-    tree->setModel( model );
-    list->setModel( model );
+    tree->setModel(model);
+    list->setModel(model);
 
-    list->setRootIndex( model->index( "." ) );
+    list->setRootIndex(model->index("."));
 
     splitter.show();
 

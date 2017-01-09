@@ -1,15 +1,15 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 The Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
  *
  *************************************************************************/
 
-#include <QtCore/QMetaProperty>
-#include <QtWidgets/QGraphicsScene>
-#include <QtWidgets/QGraphicsItem>
+#include <QMetaProperty>
+#include <QGraphicsScene>
+#include <QGraphicsItem>
 #include "transformationitem.h"
 
 TransformationItem::TransformationItem(QObject* parent) :  QObject(parent),
@@ -38,19 +38,19 @@ QStringList TransformationItem::operations() const {
 
 void TransformationItem::updateText() {
     QString op = operationStr();
-//    setText(op);
+    //    setText(op);
     QString paramString;
     switch (m_operation) {
-        case TRANSLATE:
-        case SHEAR:
-        case SCALE: paramString = QString("%1, %2").arg(m_x).arg(m_y);
-            break;
-        case ROTATE: paramString = QString("%1, %2").arg(m_angle).arg(m_axis);
-            break;
-        case MATRIX: paramString = QString("matrix");
-            break;
-        default: paramString=QString();
-            break;
+    case TRANSLATE:
+    case SHEAR:
+    case SCALE: paramString = QString("%1, %2").arg(m_x).arg(m_y);
+        break;
+    case ROTATE: paramString = QString("%1, %2").arg(m_angle).arg(m_axis);
+        break;
+    case MATRIX: paramString = QString("matrix");
+        break;
+    default: paramString=QString();
+        break;
 
     }
     setText(QString("%1(%2)").arg(op).arg(paramString));
@@ -120,18 +120,18 @@ void TransformationItem::reverseApply(QGraphicsItem * item) {
     QTransform transformed; // = item->transform();
     m_old = item->transform();
     switch (m_operation) {
-        case ROTATE: transformed.rotate(m_angle, m_axis);
-            break;
-        case SHEAR: transformed.shear(m_x, m_y);
-            break;
-        case SCALE: transformed.scale(m_x, m_y);
-            break;
-        case TRANSLATE: transformed.translate(m_x, m_y);
-            break;
-        case MATRIX: transformed = m_matrix;
-            break;
-        default:
-            break;
+    case ROTATE: transformed.rotate(m_angle, m_axis);
+        break;
+    case SHEAR: transformed.shear(m_x, m_y);
+        break;
+    case SCALE: transformed.scale(m_x, m_y);
+        break;
+    case TRANSLATE: transformed.translate(m_x, m_y);
+        break;
+    case MATRIX: transformed = m_matrix;
+        break;
+    default:
+        break;
     }
     transformed = transformed.inverted();
     item->setTransform(m_old * transformed);
@@ -141,33 +141,36 @@ void TransformationItem::reverseApply(QGraphicsItem * item) {
 
 void TransformationItem::apply(QGraphicsItem* item) {
     m_old = item->transform();
-    QTransform t = item->transform();
     switch (m_operation) {
 
-        case ROTATE: {
-            t.rotate(m_angle, m_axis);
-            item->setTransform(item->transform() * t);
-            break;
-        }
-        case SHEAR: {
-            t.shear(m_x, m_y);
-            item->setTransform(item->transform() * t);
-            break;
-        }
-        case SCALE: {
-            t.scale(m_x, m_y);
-            item->setTransform(item->transform() * t);
-            break;
-        }
-        case TRANSLATE: {
-            t.translate(m_x, m_y);
-            item->setTransform(item->transform() * t);
-            break;
-        }
-        case MATRIX: item->setTransform(item->transform() * m_matrix);
-            break;
-        default:
-            break;
+    case ROTATE: {
+        QTransform t = item->transform();
+        t.rotate(m_angle, m_axis);
+        item->setTransform(item->transform() * t);
+        break;
+    }
+    case SHEAR: {
+        QTransform t = item->transform();
+        t.shear(m_x, m_y);
+        item->setTransform(item->transform() * t);
+        break;
+    }
+    case SCALE: {
+        QTransform t = item->transform();
+        t.scale(m_x, m_y);
+        item->setTransform(item->transform() * t);
+        break;
+    }
+    case TRANSLATE: {
+        QTransform t = item->transform();
+        t.translate(m_x, m_y);
+        item->setTransform(item->transform() * t);
+        break;
+    }
+    case MATRIX: item->setTransform(item->transform() * m_matrix);
+        break;
+    default:
+        break;
     }
 
 }

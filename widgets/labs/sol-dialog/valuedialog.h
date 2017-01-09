@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 The Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
@@ -26,15 +26,15 @@ class ValueDialog : public QDialog
     Q_OBJECT
 
 public:
-    ValueDialog(QWidget *parent = 0);
+    ValueDialog(QWidget *parent = Q_NULLPTR);
 
-public slots:
+public Q_SLOTS:
     void setValue(int value);
 
 protected:
-    void accept();
+    void accept() Q_DECL_OVERRIDE;
 
-signals:
+Q_SIGNALS:
     void valueChanged(int value);
 
 private:

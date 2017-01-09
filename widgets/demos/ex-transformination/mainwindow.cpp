@@ -1,20 +1,18 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 The Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
  *
  *************************************************************************/
 
-#include <QtWidgets>
 #include "coordinatesystem.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "transformdialog.h"
 #include "transformationitem.h"
 #include "animationqueue.h"
-
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -30,9 +28,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->transformListWidget->addAction(ui->action_Add_Transform);
     ui->transformListWidget->addAction(ui->actionRemove);
     createItems();
-
-
-
 }
 
 void MainWindow::select(TransformationItem *item) {
@@ -55,12 +50,11 @@ void MainWindow::createItems() {
 
     m_scene->addItem(m_before);
     m_animationQueue = new AnimationQueue(m_after, this);
-    connect (m_animationQueue, SIGNAL(animating(TransformationItem*)),
-             this, SLOT(select(TransformationItem*)));
-    connect (m_animationQueue, SIGNAL(operationFinished()),
-             this, SLOT(finishedOperation()));
+    connect (m_animationQueue, &AnimationQueue::animating,
+             this, &MainWindow::select);
+    connect (m_animationQueue, &AnimationQueue::operationFinished,
+             this, &MainWindow::finishedOperation);
 }
-
 
 void MainWindow::createTestObjects() {
     TransformationItem *i = new TransformationItem;
@@ -121,9 +115,6 @@ void MainWindow::on_actionApply_triggered()
     if (item ==0) return;
     TransformationItem *ti = dynamic_cast<TransformationItem*>(item);
     m_animationQueue->add(ti);
-
-
-
 }
 
 void MainWindow::finishedOperation() {
@@ -224,7 +215,7 @@ void MainWindow::on_actionMove_Down_triggered()
 }
 
 
-void MainWindow::on_transformListWidget_doubleClicked(QModelIndex index)
+void MainWindow::on_transformListWidget_doubleClicked(QModelIndex)
 {
     on_actionApply_triggered();
 }

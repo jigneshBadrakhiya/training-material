@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 The Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
@@ -10,10 +10,9 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QtWidgets/QMainWindow>
-#include <QtCore/QModelIndex>
-#include <QtWidgets/QGraphicsView>
-
+#include <QMainWindow>
+#include <QModelIndex>
+#include <QGraphicsView>
 class CoordinateSystem;
 class AnimationQueue;
 class TransformationItem;
@@ -24,7 +23,7 @@ namespace Ui {
 class MainWindow : public QMainWindow {
     Q_OBJECT
 public:
-    MainWindow(QWidget *parent = 0);
+    MainWindow(QWidget *parent = Q_NULLPTR);
     ~MainWindow();
     void createTestObjects();
 
@@ -33,7 +32,7 @@ protected:
     void createItems();
 
 
-private slots:
+private Q_SLOTS:
     void on_transformListWidget_doubleClicked(QModelIndex index);
     void on_actionReverse_Apply_triggered();
     void on_actionMove_Down_triggered();
@@ -48,7 +47,7 @@ private slots:
     void on_actionEdit_triggered();
     void on_action_Quit_triggered();
 
-    void select(TransformationItem* item);
+    void select(TransformationItem *item);
     void finishedOperation();
 private:
     Ui::MainWindow *ui;

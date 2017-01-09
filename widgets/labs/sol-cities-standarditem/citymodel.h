@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 The Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
@@ -18,7 +18,7 @@ class CityModel : public QStandardItemModel
 {
     Q_OBJECT
 public:
-    explicit CityModel(QObject *parent = 0);
+    explicit CityModel(QObject *parent = Q_NULLPTR);
 
     QHash<int, QByteArray> roleNames() const;
 

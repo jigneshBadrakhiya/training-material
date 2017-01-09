@@ -1,17 +1,16 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 The Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
  *
  *************************************************************************/
 
-#include <QtWidgets/QGraphicsScene>
+#include <QGraphicsScene>
 #include "animationqueue.h"
 #include "coordinatesystem.h"
 #include "transformationitem.h"
-
 
 AnimationQueue::AnimationQueue(CoordinateSystem *graphicsObject, QObject* parent) : QObject(parent)
 {
@@ -22,9 +21,8 @@ AnimationQueue::AnimationQueue(CoordinateSystem *graphicsObject, QObject* parent
     m_timeLine.setFrameRange(0, 100);
     m_timeLine.setDuration(2000);
 
-    connect (&m_timeLine, SIGNAL(valueChanged(qreal)), this, SLOT(advance(qreal)));
-    connect (&m_timeLine, SIGNAL(finished()), this, SLOT(finishAnimation()));
-
+    connect(&m_timeLine, &QTimeLine::valueChanged, this, &AnimationQueue::advance);
+    connect(&m_timeLine, &QTimeLine::finished, this, &AnimationQueue::finishAnimation);
 }
 
 

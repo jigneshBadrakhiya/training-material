@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 The Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
@@ -13,16 +13,16 @@ class StringListModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
-    StringListModel(const QStringList& list, QObject *parent = 0)
+    StringListModel(const QStringList& list, QObject *parent = Q_NULLPTR)
         : QAbstractListModel(parent), _list(list) {}
 
-    int rowCount(const QModelIndex &parent = QModelIndex()) const
+    int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE
     {
         Q_UNUSED( parent );
         return _list.count();
     }
 
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole ) const
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE
     {
         if (!index.isValid())
             return QVariant();
@@ -36,7 +36,7 @@ public:
             return QVariant();
     }
 
-    QVariant headerData( int section, Qt::Orientation orientation, int role = Qt::DisplayRole ) const
+    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE
     {
         if (role != Qt::DisplayRole)
             return QVariant();
@@ -49,7 +49,7 @@ public:
             return QString("Countr %1").arg(section);
     }
 
-    Qt::ItemFlags flags(const QModelIndex &index) const
+    Qt::ItemFlags flags(const QModelIndex &index) const Q_DECL_OVERRIDE
     {
         if (!index.isValid())
             return Qt::ItemIsEnabled
@@ -63,7 +63,7 @@ public:
 
     bool setData(const QModelIndex &index,
                  const QVariant &value,
-                 int role = Qt::EditRole )
+                 int role = Qt::EditRole) Q_DECL_OVERRIDE
     {
         Q_UNUSED( role );
 
@@ -75,7 +75,7 @@ public:
         return false;
     }
 
-    bool insertRows(int position, int rows, const QModelIndex& /*parent*/ )
+    bool insertRows(int position, int rows, const QModelIndex& /*parent*/) Q_DECL_OVERRIDE
     {
         beginInsertRows(QModelIndex(), position, position+rows-1);
 
@@ -87,7 +87,7 @@ public:
         return true;
     }
 
-    bool removeRows(int position, int rows, const QModelIndex& /*parent*/)
+    bool removeRows(int position, int rows, const QModelIndex& /*parent*/) Q_DECL_OVERRIDE
     {
         beginRemoveRows(QModelIndex(), position, position+rows-1);
 
@@ -99,72 +99,72 @@ public:
         return true;
     }
 
-    QStringList mimeTypes() const
+    QStringList mimeTypes() const Q_DECL_OVERRIDE
     {
         return QAbstractListModel::mimeTypes() << "text/plain";
     }
 
-    QMimeData* mimeData( const QModelIndexList& indexes ) const
+    QMimeData *mimeData(const QModelIndexList& indexes) const Q_DECL_OVERRIDE
     {
         QStringList list;
-        foreach( QModelIndex index, indexes )
+        for (const QModelIndex &index : indexes)
             list << data(index).toString();
 
-        QMimeData* mimeData = QAbstractListModel::mimeData( indexes );
-        mimeData->setText( list.join(", ") );
+        QMimeData *mimeData = QAbstractListModel::mimeData(indexes);
+        mimeData->setText(list.join(", "));
         return mimeData;
     }
 
-    virtual bool dropMimeData( const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex & parent )
+    bool dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent) Q_DECL_OVERRIDE
     {
-        if  ( data->hasText() ) {
-            if ( parent.isValid() ) {
+        if  (data->hasText()) {
+            if (parent.isValid()) {
                 // drop on an item
-                setData( parent, data->text() );
+                setData(parent, data->text());
             }
             else {
                 // drop outside items
-                insertRows( rowCount(), 1, QModelIndex() );
-                setData( index( rowCount()-1, 0, QModelIndex() ), data->text());
+                insertRows(rowCount(), 1, QModelIndex());
+                setData(index(rowCount()-1, 0, QModelIndex() ), data->text());
             }
             return true;
         }
         else
-            return QAbstractListModel::dropMimeData( data, action, row, column, parent );
+            return QAbstractListModel::dropMimeData(data, action, row, column, parent);
     }
 
 private:
     QStringList _list;
 };
 
-int main( int argc, char** argv ) {
-    QApplication app( argc, argv );
+int main(int argc, char *argv[])
+{
+    QApplication app(argc, argv);
 
     QStringList countries;
     countries << "Denmark" << "Norway" << "Sweeden" << "USA" << "Poland";
-    StringListModel* model = new StringListModel(countries);
+    StringListModel model(countries);
 
-    QListView* list = new QListView;
-    list->setModel( model );
-    list->setWindowTitle( "QListView" );
-    list->setDragEnabled( true );
-    list->setAcceptDrops( true );
-    list->show();
+    QListView list;
+    list.setModel(&model);
+    list.setWindowTitle("QListView");
+    list.setDragEnabled(true);
+    list.setAcceptDrops(true);
+    list.show();
 
-    QTreeView* tree = new QTreeView;
-    tree->setModel( model );
-    tree->setWindowTitle( "QTreeView" );
-    tree->setDragEnabled( true );
-    tree->setAcceptDrops( true );
-    tree->show();
+    QTreeView tree;
+    tree.setModel(&model);
+    tree.setWindowTitle("QTreeView");
+    tree.setDragEnabled(true);
+    tree.setAcceptDrops(true);
+    tree.show();
 
-    QTableView* table = new QTableView;
-    table->setModel( model );
-    table->setDragEnabled( true );
-    table->setAcceptDrops( true );
-    table->setWindowTitle( "QTableView" );
-
-    table->show();
+    QTableView table;
+    table.setModel(&model);
+    table.setDragEnabled(true);
+    table.setAcceptDrops(true);
+    table.setWindowTitle("QTableView");
+    table.show();
 
     return app.exec();
 }

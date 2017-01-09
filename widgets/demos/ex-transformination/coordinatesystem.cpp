@@ -1,18 +1,18 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 The Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
  *
  *************************************************************************/
 
-#include <QtGui/QPainter>
-#include <QtWidgets/QStyle>
-#include <QtWidgets/QStyleOptionFocusRect>
-#include <QtWidgets/QStyleOptionGraphicsItem>
-#include <QtGui/QPalette>
-#include <QtWidgets/QApplication>
+#include <QPainter>
+#include <QStyle>
+#include <QStyleOptionFocusRect>
+#include <QStyleOptionGraphicsItem>
+#include <QPalette>
+#include <QApplication>
 #include "coordinatesystem.h"
 
 

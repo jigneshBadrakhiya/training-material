@@ -1,11 +1,11 @@
 /*************************************************************************
- *
- * Copyright (c) 2016 Qt Group Plc.
- * All rights reserved.
- *
- * See the LICENSE.txt file shipped along with this file for the license.
- *
- *************************************************************************/
+*
+* Copyright (c) 2016 Qt Company
+* All rights reserved.
+*
+* See the LICENSE.txt file shipped along with this file for the license.
+*
+*************************************************************************/
 
 #include <QtWidgets>
 
@@ -13,7 +13,7 @@ class StringListModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
-    StringListModel(const QStringList& input, QObject *parent = 0)
+    StringListModel(const QStringList& input, QObject *parent = Q_NULLPTR)
         : QAbstractListModel(parent), _input(input) {}
 
 
@@ -78,8 +78,8 @@ public:
         return false;
     }
 
-// --------------------------------------------------------------------
-// START_CHANGES
+    // --------------------------------------------------------------------
+    // START_CHANGES
     bool insertRows(int row, int count, const QModelIndex& parent=QModelIndex() )
     {
         if (parent.isValid()) {
@@ -110,34 +110,19 @@ public:
         endRemoveRows();
         return true;
     }
-// END_CHANGES
-// --------------------------------------------------------------------
+    // END_CHANGES
+    // --------------------------------------------------------------------
 
 private:
     QStringList _input;
 };
 
-int main( int argc, char** argv ) {
-    QApplication app( argc, argv );
+int main(int argc, char *argv[]) {
+    QApplication app(argc, argv);
 
     QStringList input;
     input << "Denmark" << "Norway" << "Sweden" << "USA" << "Poland";
-    StringListModel* model = new StringListModel(input);
-
-    QListView* list = new QListView;
-    list->setModel( model );
-    list->setWindowTitle( "QListView" );
-    list->show();
-
-    QTreeView* tree = new QTreeView;
-    tree->setModel( model );
-    tree->setWindowTitle( "QTreeView" );
-    tree->show();
-
-    QTableView* table = new QTableView;
-    table->setModel( model );
-    table->setWindowTitle( "QTableView" );
-    table->show();
+    StringListModel *model = new StringListModel(input);
 
     // --------------------------------------------------------------------
     // BEGIN_CHANGES
@@ -149,7 +134,28 @@ int main( int argc, char** argv ) {
     // END_CHANGES
     // --------------------------------------------------------------------
 
+    QListView *list = new QListView;
+    list->setModel(model);
+    list->setWindowTitle("QListView");
+    list->show();
+
+    QTreeView *tree = new QTreeView;
+    tree->setModel(model);
+    tree->setWindowTitle("QTreeView");
+    tree->show();
+
+    QTableView *table = new QTableView;
+    table->setModel(model);
+    table->setWindowTitle("QTableView");
+
+    table->show();
+
     return app.exec();
 }
 
 #include "main.moc"
+
+
+
+
+

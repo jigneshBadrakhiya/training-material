@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 The Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
@@ -10,10 +10,9 @@
 #ifndef ANIMATIONQUEUE_H
 #define ANIMATIONQUEUE_H
 
-#include <QtCore/QObject>
-#include <QtGui/QTransform>
-#include <QtCore/QTimeLine>
-
+#include <QObject>
+#include <QTransform>
+#include <QTimeLine>
 class CoordinateSystem;
 class TransformationItem;
 
@@ -24,18 +23,18 @@ class AnimationQueue : public QObject
 {
     Q_OBJECT
 public:
-    AnimationQueue(CoordinateSystem *graphicsObject, QObject* parent=0);
+    AnimationQueue(CoordinateSystem *graphicsObject, QObject* parent=Q_NULLPTR);
     void add(TransformationItem* i);
     void setItem(CoordinateSystem* a) {
         m_before = a;
     }
-protected slots:
+protected Q_SLOTS:
     void applyGradual(TransformationItem*);
     void advance(qreal);
     void finishAnimation();
-signals:
+Q_SIGNALS:
     void operationFinished();
-    void animating(TransformationItem*);
+    void animating(TransformationItem *);
 private:
     QTimeLine m_timeLine;
     CoordinateSystem *m_before, *m_after;

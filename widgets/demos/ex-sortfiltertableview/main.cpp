@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 The Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
@@ -17,14 +17,13 @@
 typedef QStandardItemModel ItemModel;
 typedef QStandardItem Item;
 
-
 ItemModel *createTableModel(QObject *parent) {
     CityEngine *engine = new CityEngine(parent);
     ItemModel *model = new ItemModel(parent);
 
     QStringList cities = engine->cities();
 
-    foreach(const QString &city, cities) {
+    for (const QString &city : cities) {
 
         QString country = engine->country(city);
         QIcon flag = engine->flag(country);
@@ -46,14 +45,14 @@ ItemModel *createTableModel(QObject *parent) {
 }
 
 
-int main( int argc,  char** argv )
+int main( int argc,  char *argv[])
 {
-    QApplication app( argc, argv );
+    QApplication app(argc, argv);
     TableView view;
-    ItemModel* model = createTableModel(&view);
+    ItemModel *model = createTableModel(&view);
 
-    view.setModel( model );
-    view.resize( 640, 480 );
+    view.setModel(model);
+    view.resize(640, 480);
     view.show();
 
     return app.exec();

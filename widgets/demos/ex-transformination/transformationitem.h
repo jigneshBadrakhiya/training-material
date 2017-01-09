@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 The Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
@@ -10,8 +10,8 @@
 #ifndef TRANSFORMATIONITEM_H
 #define TRANSFORMATIONITEM_H
 
-#include <QtWidgets/QListWidgetItem>
-#include <QtCore/QMetaEnum>
+#include <QListWidgetItem>
+#include <QMetaEnum>
 
 class QGraphicsItem;
 
@@ -22,7 +22,7 @@ class TransformationItem : public QObject, public QListWidgetItem
     Q_OBJECT
     Q_PROPERTY(Operation operation READ operation WRITE setOperation)
 public:
-    TransformationItem(QObject* parent=0);
+    TransformationItem(QObject* parent = Q_NULLPTR);
     enum Operation {NONE=0, ROTATE=1, SCALE=2, TRANSLATE=3, MATRIX=4, SHEAR=5} ;
     Q_ENUMS(Operation);
 

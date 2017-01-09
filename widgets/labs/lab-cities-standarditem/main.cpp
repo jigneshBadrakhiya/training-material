@@ -1,18 +1,18 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 The Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
  *
  *************************************************************************/
 
-#include <QtCore/QDebug>
-#include <QtGui/QGuiApplication>
-#include <QtQml/QQmlContext>
-#include <QtQml/QQmlEngine>
-#include <QtQuick/QQuickView>
-#include <QtGui/QStandardItemModel>
+#include <QDebug>
+#include <QGuiApplication>
+#include <QQmlContext>
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
+#include <QStandardItemModel>
 
 #include "citymodel.h"
 
@@ -20,12 +20,11 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
-    QQuickView viewer;
+    QQmlApplicationEngine engine;
     CityModel model;
 
-    viewer.engine()->rootContext()->setContextProperty("_model", &model);
-    viewer.setSource(QUrl("qrc:///main.qml"));
-    viewer.show();
+    engine.rootContext()->setContextProperty("_model", &model);
+    engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
 
     return app.exec();
 }

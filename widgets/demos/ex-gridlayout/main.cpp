@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 The Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
@@ -14,7 +14,7 @@ class FontSelector : public QWidget
     Q_OBJECT
 
 public:
-    FontSelector(QWidget *parent = 0)
+    FontSelector(QWidget *parent = Q_NULLPTR)
         : QWidget(parent)
     {
         QGridLayout *layout = new QGridLayout;
@@ -28,15 +28,15 @@ public:
         m_familyList = new QListWidget(this);
         m_familyList->addItems(m_database.families());
         connect(
-            m_familyList, SIGNAL(currentTextChanged(QString)),
-            this, SLOT(onFamilyChanged(QString))
+            m_familyList, &QListWidget::currentTextChanged,
+            this, &FontSelector::onFamilyChanged
         );
 
         // setup style list widget
         m_styleList = new QListWidget(this);
         connect(
-            m_styleList, SIGNAL(currentTextChanged(QString)),
-            this, SLOT(onStyleChanged(QString))
+            m_styleList, &QListWidget::currentTextChanged,
+            this, &FontSelector::onStyleChanged
         );
 
         // setup size list widget

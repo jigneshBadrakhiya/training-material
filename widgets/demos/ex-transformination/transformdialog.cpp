@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 The Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
@@ -20,8 +20,6 @@ TransformDialog::TransformDialog(TransformationItem* ti, QWidget *parent) :
 }
 
 void TransformDialog::updateUi() {
-    // TODO: set values in input widgets based on values from m_item
-
     if (m_item != 0) {
         QTransform t = m_item->matrix();
         ui->m11->setValue(t.m11());
@@ -41,8 +39,7 @@ void TransformDialog::updateUi() {
         ui->verticalSpinbox->setValue(m_item->y());
     }
 
-    on_operationCombo_activated();
-
+    on_operationCombo_activated(0);
 
 }
 
@@ -92,7 +89,7 @@ void TransformDialog::changeEvent(QEvent *e)
     }
 }
 
-void TransformDialog::on_operationCombo_activated()
+void TransformDialog::on_operationCombo_activated(int )
 {
     QString value = ui->operationCombo->currentText();
     QStringList xyops= QStringList() << "SHEAR" << "SCALE" << "TRANSLATE";
@@ -102,3 +99,5 @@ void TransformDialog::on_operationCombo_activated()
     // updateGeometry();
     adjustSize();
 }
+
+

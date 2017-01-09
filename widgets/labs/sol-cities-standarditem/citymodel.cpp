@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 The Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
@@ -28,11 +28,11 @@ void CityModel::setupModel()
     CityEngine engine;
 
     const QStringList countries = engine.countries();
-    Q_FOREACH (const QString &country, countries) {
+    for (const QString &country : countries) {
         const QIcon flag = engine.flag(country);
         const QStringList cities = engine.citiesByCountry(country);
 
-        Q_FOREACH (const QString &city, cities) {
+        for (const QString &city : cities) {
             const qreal area = engine.area(city);
             const int population = engine.population(city);
 

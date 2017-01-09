@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 The Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
@@ -19,9 +19,9 @@ MainWindow::MainWindow(QWidget *parent)
     m_message = new QLabel(this);
 
     QPushButton *modal = new QPushButton("Modal", this);
-    connect(modal, SIGNAL(clicked()), this, SLOT(onModal()));
+    connect(modal, &QPushButton::clicked, this, &MainWindow::onModal);
     QPushButton *modeless = new QPushButton("Modeless", this);
-    connect(modeless, SIGNAL(clicked()), this, SLOT(onModeless()));
+    connect(modeless, &QPushButton::clicked, this, &MainWindow::onModeless);
 
     QVBoxLayout *layout = new QVBoxLayout;
     layout->addWidget(m_slider);
@@ -40,8 +40,8 @@ void MainWindow::onModal()
     ValueDialog dialog(this);
     dialog.setWindowTitle("Modal Dialog");
     dialog.setValue(m_slider->value());
-    connect(&dialog, SIGNAL(valueChanged(int)), m_slider, SLOT(setValue(int)));
-    connect(m_slider, SIGNAL(valueChanged(int)), &dialog, SLOT(setValue(int)));
+    connect(&dialog, &ValueDialog::valueChanged, m_slider, &QSlider::setValue);
+    connect(m_slider, &QSlider::valueChanged, &dialog, &ValueDialog::setValue);
     dialog.exec();
     m_message->setText("exec returns after user closes dialog");
 }
@@ -52,8 +52,8 @@ void MainWindow::onModeless()
         m_valueDialog = new ValueDialog(this);
         m_valueDialog->setWindowTitle("Modeless Dialog");
         m_valueDialog->setValue(m_slider->value());
-        connect(m_valueDialog, SIGNAL(valueChanged(int)), m_slider, SLOT(setValue(int)));
-        connect(m_slider, SIGNAL(valueChanged(int)), m_valueDialog, SLOT(setValue(int)));
+        connect(m_valueDialog, &ValueDialog::valueChanged, m_slider, &QSlider::setValue);
+        connect(m_slider, &QSlider::valueChanged, m_valueDialog, &ValueDialog::setValue);
     }
     m_valueDialog->show();
     m_valueDialog->raise();

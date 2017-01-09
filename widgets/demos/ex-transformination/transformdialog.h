@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 The Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
@@ -10,8 +10,7 @@
 #ifndef TRANSFORMDIALOG_H
 #define TRANSFORMDIALOG_H
 
-#include <QtWidgets/QDialog>
-
+#include <QDialog>
 class TransformationItem;
 namespace Ui {
     class TransformDialog;
@@ -21,20 +20,20 @@ namespace Ui {
 class TransformDialog : public QDialog {
     Q_OBJECT
 public:
-    TransformDialog(TransformationItem* item, QWidget *parent = 0);
+    TransformDialog(TransformationItem* item, QWidget *parent = Q_NULLPTR);
     ~TransformDialog();
 
 protected:
-    void changeEvent(QEvent *e);
-protected slots:
-    void accept();
+    void changeEvent(QEvent *e) Q_DECL_OVERRIDE;
+protected Q_SLOTS:
+    void accept() Q_DECL_OVERRIDE;
     void updateUi();
 private:
     Ui::TransformDialog *ui;
     TransformationItem *m_item;
 
-private slots:
-    void on_operationCombo_activated();
+private Q_SLOTS:
+    void on_operationCombo_activated(int index);
 };
 
 #endif // TRANSFORMDIALOG_H

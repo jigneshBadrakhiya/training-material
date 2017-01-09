@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
@@ -21,7 +21,7 @@ class CityEngine : public QObject
     Q_OBJECT
 public:
     enum { CityName=0, CityCountry=1, CityPopulation=2, CityArea=3, CityCountryFlag=4 };
-    explicit CityEngine(QObject *parent = 0);
+    explicit CityEngine(QObject *parent = Q_NULLPTR);
     ~CityEngine();
     QStringList cities() const;
     QString country(const QString &cityName) const;

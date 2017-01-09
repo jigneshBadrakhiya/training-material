@@ -1,11 +1,11 @@
 /*************************************************************************
- *
- * Copyright (c) 2016 Qt Group Plc.
- * All rights reserved.
- *
- * See the LICENSE.txt file shipped along with this file for the license.
- *
- *************************************************************************/
+*
+* Copyright (c) 2016 Qt Company
+* All rights reserved.
+*
+* See the LICENSE.txt file shipped along with this file for the license.
+*
+*************************************************************************/
 
 #include <QtWidgets>
 
@@ -13,7 +13,7 @@ class StringListModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
-    StringListModel(const QStringList& input, QObject *parent = 0)
+    StringListModel(const QStringList& input, QObject *parent = Q_NULLPTR)
         : QAbstractListModel(parent), _input(input) {}
 
 
@@ -41,8 +41,8 @@ public:
         return QVariant();
     }
 
-// --------------------------------------------------------------------
-// START_CHANGES
+    // --------------------------------------------------------------------
+    // START_CHANGES
     QVariant headerData( int section, Qt::Orientation orientation, int role = Qt::DisplayRole ) const
     {
         if (role != Qt::DisplayRole) {
@@ -57,33 +57,33 @@ public:
             return QString("Country %1").arg(section);
         }
     }
-// END_CHANGES
-// --------------------------------------------------------------------
-
+    // END_CHANGES
+    // --------------------------------------------------------------------
 private:
     QStringList _input;
 };
 
-int main( int argc, char** argv ) {
-    QApplication app( argc, argv );
+int main(int argc, char *argv[]) {
+    QApplication app(argc, argv);
 
     QStringList input;
     input << "Denmark" << "Norway" << "Sweden" << "USA" << "Poland";
-    StringListModel* model = new StringListModel(input);
+    StringListModel *model = new StringListModel(input);
 
-    QListView* list = new QListView;
-    list->setModel( model );
-    list->setWindowTitle( "QListView" );
+
+    QListView *list = new QListView;
+    list->setModel(model);
+    list->setWindowTitle("QListView");
     list->show();
 
-    QTreeView* tree = new QTreeView;
-    tree->setModel( model );
-    tree->setWindowTitle( "QTreeView" );
+    QTreeView *tree = new QTreeView;
+    tree->setModel(model);
+    tree->setWindowTitle("QTreeView");
     tree->show();
 
-    QTableView* table = new QTableView;
-    table->setModel( model );
-    table->setWindowTitle( "QTableView" );
+    QTableView *table = new QTableView;
+    table->setModel(model);
+    table->setWindowTitle("QTableView");
 
     table->show();
 
@@ -91,3 +91,7 @@ int main( int argc, char** argv ) {
 }
 
 #include "main.moc"
+
+
+
+

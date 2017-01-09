@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2016 The Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
@@ -10,27 +10,26 @@
 #ifndef COORDINATESYSTEM_H
 #define COORDINATESYSTEM_H
 
-#include <QtWidgets/QGraphicsItem>
-#include <QtGui/QPen>
-#include <QtGui/QBrush>
+#include <QGraphicsItem>
+#include <QPen>
+#include <QBrush>
 
 /** An Example QGraphicsItem that plots a coordinate system
     in its rectangular area. */
 class CoordinateSystem : public QGraphicsItem {
 public:
-    explicit CoordinateSystem( QGraphicsItem* parent = 0 );
-    void setRect( const QRectF& r );
+    explicit CoordinateSystem(QGraphicsItem* parent = Q_NULLPTR);
+    void setRect(const QRectF& r);
     QRectF rect() const;
 
-    void setText( const QString& txt);
+    void setText(const QString& txt);
     QString text() const;
 
     /** @return a shallow copy of this graphics item */
-    CoordinateSystem* copy();
+    CoordinateSystem *copy();
 
-
-    QRectF boundingRect() const;
-    void paint( QPainter* p, const QStyleOptionGraphicsItem* opt, QWidget* w );
+    QRectF boundingRect() const Q_DECL_OVERRIDE;
+    void paint(QPainter *p, const QStyleOptionGraphicsItem *opt, QWidget *w) Q_DECL_OVERRIDE;
 
     QPen edgePen() const       { return m_edgePen; }
     QBrush edgeBrush() const { return m_edgeBrush; }
