@@ -1,9 +1,3 @@
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
-
-#include <QMediaPlayer>
-#include <QMediaPlaylist>
-#include <QVideoWidget>
 /*************************************************************************
  *
  * Copyright (c) 2016 The Qt Company
@@ -13,6 +7,12 @@
  *
  *************************************************************************/
 
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+
+#include <QMediaPlayer>
+#include <QMediaPlaylist>
+#include <QVideoWidget>
 #include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent) :
