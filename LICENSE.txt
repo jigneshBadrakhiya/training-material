@@ -1,4 +1,4 @@
-Copyright (C) 2016 The Qt Company 
+Copyright (C) 2018 The Qt Company 
 All rights reserved.
 Contact: The Qt Company (training@qt.io)
 
