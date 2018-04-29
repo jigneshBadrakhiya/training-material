@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Company
+ * Copyright (c) 2018 Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
@@ -14,7 +14,8 @@
 #include <QTcpSocket>
 
 TcpConnectionElement::TcpConnectionElement(QObject *parent)
-    : QObject(parent), m_hostName("127.0.0.1")
+    : QObject(parent)
+    , m_hostAddress(QHostAddress::LocalHost)
 {
 }
 
@@ -32,20 +33,20 @@ void TcpConnectionElement::setPort(int port)
 {
     if (m_port != port) {
         m_port = port;
-        emit portChanged();
+        Q_EMIT portChanged();
     }
 }
 
-QString TcpConnectionElement::hostName() const
+QHostAddress TcpConnectionElement::hostAddress() const
 {
-    return m_hostName;
+    return m_hostAddress;
 }
 
-void TcpConnectionElement::setHostName(const QString &hostName)
+void TcpConnectionElement::setHostAddress(const QHostAddress &hostAddress)
 {
-    if (m_hostName != hostName) {
-        m_hostName = hostName;
-        emit hostNameChanged();
+    if (m_hostAddress != hostAddress) {
+        m_hostAddress = hostAddress;
+        Q_EMIT hostAddressChanged();
     }
 }
 
@@ -66,12 +67,12 @@ void TcpConnectionElement::initialize()
 {
     if (m_connectionType == Server) {
         m_tcpServer = new QTcpServer;
-        m_tcpServer->listen(QHostAddress(m_hostName), m_port);
+        m_tcpServer->listen(m_hostAddress, m_port);
         connect(m_tcpServer, &QTcpServer::newConnection, this, &TcpConnectionElement::slotConnection);
     }
     else {
         m_tcpSocket = new QTcpSocket(this);
-        m_tcpSocket->connectToHost(m_hostName, m_port);
+        m_tcpSocket->connectToHost(m_hostAddress, m_port);
         connect(m_tcpSocket, &QTcpSocket::readyRead, this, &TcpConnectionElement::receivedData);
     }
 }

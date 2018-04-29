@@ -1,13 +1,13 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2018 Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
  *
  *************************************************************************/
 
-import QtQuick 2.4
+import QtQuick 2.9
 import QtQuick.Window 2.2
 import CustomComponents 1.0
 

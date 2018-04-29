@@ -1,15 +1,15 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Company
+ * Copyright (c) 2018 Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
  *
  *************************************************************************/
 
-import QtQuick 2.5
+import QtQuick 2.9
 import QtQuick.Window 2.0
-import Shapes 5.0
+import ShapesOriginal 5.0
 
 Window {
     visible: true

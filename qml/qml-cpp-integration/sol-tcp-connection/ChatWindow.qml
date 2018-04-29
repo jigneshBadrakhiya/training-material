@@ -1,19 +1,19 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Company
+ * Copyright (c) 2018 Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
  *
  *************************************************************************/
 
-import QtQuick 2.5
+import QtQuick 2.9
 import TCP 1.0
 
 Item {
-    property alias type : tcpConnection.type
-    property alias port : tcpConnection.port
-    property alias hostName : tcpConnection.hostName
+    property alias type: tcpConnection.type
+    property alias port: tcpConnection.port
+    property alias hostAddress: tcpConnection.hostAddress
 
     TcpConnectionElement {
         id : tcpConnection
@@ -55,6 +55,6 @@ Item {
 
     function titleText() {
         return (tcpConnection.type == TcpConnectionElement.Server ? "Server" : "Client")
-                + " (" + hostName + ": " + port + ")"
+                + " (" + hostAddress + ": " + port + ")"
     }
 }

@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Company
+ * Copyright (c) 2018 Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
@@ -11,6 +11,7 @@
 #define TCPCONNECTIONELEMENT_H
 
 #include <QObject>
+#include <QHostAddress>
 
 class QTcpServer;
 class QTcpSocket;
@@ -19,7 +20,7 @@ class TcpConnectionElement : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(int port READ port WRITE setPort NOTIFY portChanged)
-    Q_PROPERTY(QString hostName READ hostName WRITE setHostName NOTIFY hostNameChanged)
+    Q_PROPERTY(QHostAddress hostAddress READ hostAddress WRITE setHostAddress NOTIFY hostAddressChanged)
     Q_PROPERTY(ConnectionType type READ connectionType WRITE setConnectionType NOTIFY connectionTypeChanged)
 
 public:
@@ -38,13 +39,13 @@ public:
     void setPort(int port);
     int port() const;
 
-    void setHostName(const QString &hostName);
-    QString hostName() const;
+    void setHostAddress(const QHostAddress &hostAddress);
+    QHostAddress hostAddress() const;
 
 Q_SIGNALS:
     void dataReceived( const QString &data );
     void portChanged();
-    void hostNameChanged();
+    void hostAddressChanged();
     void connectionTypeChanged();
 
 public Q_SLOTS:
@@ -56,12 +57,14 @@ private Q_SLOTS:
     void slotConnection();
 
 private:
-    int m_port;
-    QString m_hostName;
+    unsigned int m_port;
+    QHostAddress m_hostAddress;
     ConnectionType m_connectionType;
 
     QTcpServer *m_tcpServer;
     QTcpSocket *m_tcpSocket;
 };
+
+Q_DECLARE_METATYPE(QHostAddress)
 
 #endif

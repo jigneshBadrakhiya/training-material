@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Company
+ * Copyright (c) 2018 Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
@@ -14,7 +14,7 @@
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
-    qmlRegisterType<EllipseItem>("Shapes", 3, 0, "Ellipse");
+    qmlRegisterType<EllipseItem>("ShapesOriginal", 3, 0, "Ellipse");
 
     QQmlApplicationEngine engine;
     engine.load(QUrl(QStringLiteral("qrc:/ellipse3.qml")));

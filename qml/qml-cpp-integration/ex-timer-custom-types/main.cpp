@@ -1,6 +1,6 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Group Plc.
+ * Copyright (c) 2018 Qt Group Plc.
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app( argc, argv );
 
-    qsrand( QDateTime::currentMSecsSinceEpoch() );
+    qsrand(QDateTime::currentMSecsSinceEpoch());
 
     // Expose the Timer class
     qmlRegisterType<Timer>( "CustomComponents", 1, 0, "Timer" );

@@ -1,13 +1,13 @@
 /*************************************************************************
  *
- * Copyright (c) 2016 Qt Company
+ * Copyright (c) 2018 Qt Company
  * All rights reserved.
  *
  * See the LICENSE.txt file shipped along with this file for the license.
  *
  *************************************************************************/
 
-import QtQuick 2.5
+import QtQuick 2.9
 import TCP 1.0
 import QtQuick.Window 2.2
 
@@ -16,8 +16,8 @@ Window {
     width: 400; height: 400
     ChatWindow {
         anchors.fill: parent
-        type : TcpConnectionElement.Server
-        port : 4242
+        type: TcpConnectionElement.Server
+        port: 4242
     }
 }
 
